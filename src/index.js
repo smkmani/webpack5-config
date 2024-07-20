@@ -1,15 +1,7 @@
-import "./styles/index.scss";
-const elvenShieldRecipe = {
-  leatherScrips: 2,
-  ironIngot: 1,
-  refineMoonstone: 4,
-};
+import ReactDom from "react-dom/client";
 
-const elvenShieldRecipeTest = {
-  ...elvenShieldRecipe,
-  lather: 1,
-  refineMoonstone: 4,
-};
+import App from "./components/App";
 
-console.log(elvenShieldRecipe);
-console.log(elvenShieldRecipeTest);
+const root = ReactDom.createRoot(document.getElementById("root"));
+
+root.render(<App />);
