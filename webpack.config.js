@@ -1,14 +1,20 @@
+const path = require("path");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+
 let mode = "development";
 let target = "web";
 const plugins = [
   new MiniCssExtractPlugin(),
   new ReactRefreshWebpackPlugin(),
-  //   new CleanWebpackPlugin(),
-  //   new HtmlWebpackPlugin({
-  //     template: "./src/index.html",
-  //   }),
+  new CleanWebpackPlugin(),
+  new ForkTsCheckerWebpackPlugin(),
+  new HtmlWebpackPlugin({
+    template: "./src/index.html",
+  }),
 ];
 
 if (process.env.NODE_ENV === "production") {
@@ -25,11 +31,15 @@ if (process.env.SERVE) {
 module.exports = {
   // mode defaults to 'production' if not set
   mode: mode,
+  entry: "./src/index.tsx",
   output: {
     // output path is required for `clean-webpack-plugin`
-    // path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "dist"),
     // this places all images processed in an image folder
     assetModuleFilename: "images/[hash][ext][query]",
+  },
+  optimization: {
+    runtimeChunk: "single",
   },
   module: {
     rules: [
@@ -61,7 +71,7 @@ module.exports = {
              * will attempt to read from the cache to avoid needing to run
              * the potentially expensive Babel recompilation process on each run.
              */
-            // cacheDirectory: true,
+            cacheDirectory: true,
           },
         },
       },
