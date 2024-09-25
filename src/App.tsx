@@ -5,6 +5,7 @@
 import "./styles/index.scss";
 import Recipes from "./components/Recipes";
 import { Users } from "./components/Users";
+import Login from "./components/Login";
 const App = () => {
   return (
     <>
@@ -12,7 +13,8 @@ const App = () => {
       <main>
         <section>
           <h1>Oh Herro, React. Mani</h1>
-          <Users />
+          <Login />
+          {/* <Users /> */}
           {/* <img src={sword} alt="sword" width="250" />
           <img src={swordSvg} alt="sword" width="250" /> */}
           {/* <Recipes /> */}
